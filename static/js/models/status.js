@@ -1,4 +1,5 @@
 define(['backbone'], function(Backbone) {
+  'use strict';
   var Status = Backbone.Model.extend({
     defaults: {
       status: 'hello'

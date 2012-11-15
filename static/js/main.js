@@ -5,7 +5,6 @@ require.config({
     'underscore': '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min',
     'handlebars': '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min',
     'backbone': '//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
-    'backbone.nopersistence': 'lib/backbone/backbone.nopersistence',
     'backbone.localstorage': 'lib/backbone/backbone.localStorage',
     'text': 'lib/require/text'
   },
@@ -21,10 +20,6 @@ require.config({
     backbone: {
       deps: ["underscore", "jquery"],
       exports: "Backbone"
-    },
-    'backbone.nopersistence': {
-      deps: ['backbone'],
-      exports: 'bnp'
     },
     'backbone.localstorage': {
       deps: ['backbone'],
@@ -49,7 +44,8 @@ require.config({
 });
 
 require(['jquery', 'views/app'], function ($, App) {
+  'use strict';
   $(function() {
-    app = new App();
+    var app = new App();
   });
 });

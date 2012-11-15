@@ -7,6 +7,7 @@ define([
   'push/tickpush',
   'collections/ticks'
 ], function ($, Backbone, Handlebars, TickView, StatusView, tickPush, Ticks) {
+  'use strict';
   var AppView = Backbone.View.extend({
     el: $('#app'),
 
@@ -30,7 +31,7 @@ define([
       while (Ticks.length > 0) {
         Ticks.models[0].destroy();
       }
-      this.addAll();
+      Ticks.trigger('reset');
     },
 
     addOne: function (tick) {

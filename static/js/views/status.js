@@ -5,6 +5,7 @@ define([
   'models/status',
   'text!templates/status.handlebars'
 ], function ($, Backbone, Handlebars, Status, statusTemplate) {
+  'use strict';
   var StatusView = Backbone.View.extend({
     el: $("#status"),
     model: new Status(),

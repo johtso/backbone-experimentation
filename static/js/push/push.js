@@ -3,6 +3,7 @@ define([
   'backbone',
   'pubnub'
 ], function (_, Backbone, pubnub) {
+  'use strict';
   var Push = function (channel) {
     this.channel = channel;
 
