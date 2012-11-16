@@ -1,16 +1,16 @@
 require.config({
   paths: {
-    'jquery': '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery',
-    'pubnub': '//pubnub.a.ssl.fastly.net/pubnub-3.3',
-    'underscore': '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min',
-    'handlebars': '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min',
-    'backbone': '//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
+    'jquery': 'lib/jquery/jquery',
+    'pubnub': 'lib/pubnub/pubnub',
+    'underscore': 'lib/underscore/underscore',
+    'backbone': 'lib/backbone/backbone',
     'backbone.localstorage': 'lib/backbone/backbone.localStorage',
     'marionette': 'lib/backbone/backbone.marionette',
 
-    'hbs': 'lib/require/hbs',
-    'i18nprecompile': 'lib/require/hbs/i18nprecompile',
-    'json2': 'lib/require/hbs/json2'
+    'hbs': 'hbs',
+    'handlebars': '../Handlebars',
+    'i18nprecompile': 'hbs/i18nprecompile',
+    'json2': 'hbs/json2'
   },
 
   hbs: {
