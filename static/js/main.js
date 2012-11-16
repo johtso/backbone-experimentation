@@ -6,16 +6,20 @@ require.config({
     'handlebars': '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min',
     'backbone': '//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
     'backbone.localstorage': 'lib/backbone/backbone.localStorage',
-    'text': 'lib/require/text'
+    'marionette': 'lib/backbone/backbone.marionette',
+
+    'hbs': 'lib/require/hbs',
+    'i18nprecompile': 'lib/require/hbs/i18nprecompile',
+    'json2': 'lib/require/hbs/json2'
   },
+
+  hbs: {
+    disableI18n: true
+  },
+
   shim: {
     underscore: {
-      exports: '_',
-      init: function () {
-        _.templateSettings = {
-          interpolate : /\{\{(.+?)\}\}/g
-        };
-      }
+      exports: '_'
     },
     backbone: {
       deps: ["underscore", "jquery"],
@@ -43,9 +47,10 @@ require.config({
   }
 });
 
-require(['jquery', 'views/app'], function ($, App) {
+require(['jquery', 'app'], function ($, app) {
   'use strict';
+
   $(function() {
-    var app = new App();
+    app.start();
   });
 });

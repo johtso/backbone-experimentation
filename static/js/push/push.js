@@ -1,37 +1,25 @@
-define([
-  'underscore',
-  'backbone',
-  'pubnub'
-], function (_, Backbone, pubnub) {
+define(['vent', 'pubnub'], function (vent, pubnub) {
   'use strict';
+
   var Push = function (channel) {
     this.channel = channel;
-
-    this.callback = function (payload) {
-      this.trigger('message', payload);
-    };
-    this.disconnect = function () {
-      this.trigger('status', 'disconnected');
-    };
-    this.reconnect = function () {
-      this.trigger('status', 'reconnected');
-    };
-    this.connect = function () {
-      this.trigger('status', 'connected');
-    };
-
-    _.bindAll(this);
 
     pubnub.subscribe({
       channel: channel,
       restore: true,
-      callback: this.callback,
-      disconnect: this.disconnect,
-      reconnect: this.reconnect,
-      connect: this.connect
+      callback: function (payload) {
+        vent.trigger('push:message', payload);
+      },
+      disconnect: function () {
+        vent.trigger('push:status', 'disconnected');
+      },
+      reconnect: function () {
+        vent.trigger('push:status', 'reconnected');
+      },
+      connect: function () {
+        vent.trigger('push:status', 'connected');
+      }
     });
-
-    _.extend(this, Backbone.Events);
   };
 
   return Push;

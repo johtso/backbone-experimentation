@@ -1,25 +1,25 @@
 define([
-  'jquery',
-  'backbone',
-  'handlebars',
+  'marionette',
+  'vent',
   'models/status',
-  'text!templates/status.handlebars'
-], function ($, Backbone, Handlebars, Status, statusTemplate) {
+  'hbs!templates/status'
+], function (Marionette, vent, Status, statusTemplate) {
   'use strict';
-  var StatusView = Backbone.View.extend({
-    el: $("#status"),
+
+  var StatusView = Marionette.ItemView.extend({
+    tagName: 'span',
     model: new Status(),
-    template: Handlebars.compile(statusTemplate),
+    template: statusTemplate,
 
     initialize: function () {
-      this.model.on('change', this.render, this);
+      this.bindTo(this.model, 'change', this.render);
     },
 
-    render: function () {
-      var data = this.model.toJSON();
-      data.type = this.model.statuses[data.status];
-      this.$el.html( this.template( data ) );
-      return this;
+    serializeData: function () {
+      return {
+        status: this.model.get('status'),
+        type: this.model.statusType()
+      };
     }
   });
 

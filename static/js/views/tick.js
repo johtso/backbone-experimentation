@@ -1,26 +1,21 @@
 define([
-  'jquery',
-  'backbone',
-  'handlebars',
-  'text!templates/tick.handlebars'
-], function ($, Backbone, Handlebars, tickTemplate) {
+  'marionette',
+  'hbs!templates/tick'
+], function (Marionette, tickTemplate) {
   'use strict';
-  var TickView = Backbone.View.extend({
+
+  var TickView = Marionette.ItemView.extend({
     tagName: 'li',
+    template: tickTemplate,
 
-    template: Handlebars.compile(tickTemplate),
-
-    render: function () {
+    serializeData: function () {
       var diff = this.model.get('timeReceived') - this.model.get('timeSent');
       diff = diff.toFixed(2);
 
-      this.$el.html(
-        this.template({
-          count: this.model.get('count'),
-          seconds: diff
-        })
-      );
-      return this;
+      return {
+        count: this.model.get('count'),
+        seconds: diff
+      };
     }
   });
 

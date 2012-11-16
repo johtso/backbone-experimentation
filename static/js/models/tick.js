@@ -5,6 +5,10 @@ define(['backbone'], function(Backbone) {
       count: 0,
       timeSent: 0,
       timeReceived: 0
+    },
+
+    comparator: function(tick) {
+      return tick.get('count');
     }
   });
 

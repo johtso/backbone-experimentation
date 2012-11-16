@@ -1,16 +1,18 @@
 define([
   'backbone',
+  'vent',
   'models/tick',
   'push/tickpush',
   'backbone.localstorage'
-], function(Backbone, Tick, tickPush, BBLocalStorage) {
+], function(Backbone, vent, Tick, tickPush) {
   'use strict';
+
   var TickCollection = Backbone.Collection.extend({
     model: Tick,
-    localStorage: new BBLocalStorage.LocalStorage('ticks-backbone'),
+    localStorage: new Backbone.LocalStorage('ticks-backbone'),
 
     initialize: function () {
-      tickPush.on('message', this.saveTick, this);
+      vent.bindTo(vent, 'push:message', this.saveTick, this);
     },
 
     saveTick: function (payload) {
@@ -23,5 +25,5 @@ define([
     }
   });
 
-  return new TickCollection();
+  return TickCollection;
 });
